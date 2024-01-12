@@ -39,6 +39,7 @@ Using the given option allows compare even if files have different line endings:
 
 ## greps greps greps
 | command | description |
+| - | - |
 | `grep -R $'\t' --color`      | non-printable characters                   |
 | `grep -ir --include=*.c  <>` | case insensitive, recursive, file filtered |
 | `grep -ir <> | grep -v  <>`  | filter out with antipattern                |
