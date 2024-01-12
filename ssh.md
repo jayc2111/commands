@@ -6,3 +6,8 @@
 ## using proxyjump
 - `ssh -J user@<remote_hop> user@<remote_dst>`
 - `scp -o 'Proxyjump user@<remote_hop>' <file> user@<remote_dst>:/<path>`
+
+## mount filesyste using ssh
+- `sshfs <user>@<rem_ip>:/<rem_path> /<loc_path>`: mount (username)
+- `sshfs -o uid=1000,gid=1000 <rem_ip>:/<rem_path> /<loc_path>`: mount (user, group)
+- `fusermount -u ~/share`: unmount

@@ -47,3 +47,8 @@ Using the given option allows compare even if files have different line endings:
 | `grep -oE "[0-9]{3} ms"`      | with regex, repetition, match only         |
 | `grep -I  <>`                 | exclude binaries                           |
 | `grep -ir <> \| grep -v  <>`  | filter out with antipattern                |
+
+
+## ip link
+- `ip link set dev <interface> down`: bring interface down
+- `ip link set dev <interface> up`: bring interface up
