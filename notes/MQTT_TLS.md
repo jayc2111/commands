@@ -31,32 +31,32 @@ Although root certificates exist as single files they can also be combined into 
 
   
 # raspberry local test
-broker: `sudo mosquitto -v -c /etc/mosquitto/mosquitto.conf`
-client: `mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h localhost -m hello -t /world`
-client: `mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h raspi3 -m hello -t /world`
+broker: `sudo mosquitto -v -c /etc/mosquitto/mosquitto.conf`  
+client: `mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h localhost -m hello -t /world`  
+client: `mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h raspi3 -m hello -t /world`  
 
 
 # odroid test
-very nice: you can save config files for mosquitto_sub and mosquitto_pub to set default options:
-`~/.config/mosquitto_sub`
-`~/.config/mosquitto_pub`
-(one pair of option value per line)
+very nice: you can save config files for mosquitto_sub and mosquitto_pub to set default options:  
+`~/.config/mosquitto_sub`  
+`~/.config/mosquitto_pub`  
+(one pair of option value per line)  
 
 ## without TLS
-`mosquitto_sub -v -t /motionCmd/# -t /userInteraction/# -q 2 -F '%t: %X (%l)' -h "192.168.2.137"`
-`echo -ne "\x05" | mosquitto_pub -d -t "/motion/status" -h "192.168.2.137" -s`
+`mosquitto_sub -v -t /motionCmd/# -t /userInteraction/# -q 2 -F '%t: %X (%l)' -h "192.168.2.137"`  
+`echo -ne "\x05" | mosquitto_pub -d -t "/motion/status" -h "192.168.2.137" -s`  
 
 ## with TLS
-`mosquitto_sub -d -v -q 2 -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h odroidc4 -t "/#" -F '%t: %X (%l)'`
-`echo -ne "\x05" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/motion/status" -s`
-`echo -ne "\x01" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/immersiveOff" -s`
-(with config)
-`echo -ne "\x01" | mosquitto_pub -d -t "/motion/status" -s`
+`mosquitto_sub -d -v -q 2 -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h odroidc4 -t "/#" -F '%t: %X (%l)'`  
+`echo -ne "\x05" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/motion/status" -s`  
+`echo -ne "\x01" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/immersiveOff" -s`  
+(with config)  
+`echo -ne "\x01" | mosquitto_pub -d -t "/motion/status" -s`  
 
 ### receive a file
-`mosquitto_sub -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/map" -C 1 > image1.png`
-(with config)
-`mosquitto_sub -t "/map" -C 1 > image1.png`
+`mosquitto_sub -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/map" -C 1 > image1.png`  
+(with config)  
+`mosquitto_sub -t "/map" -C 1 > image1.png`  
 
 
 
