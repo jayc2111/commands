@@ -46,9 +46,6 @@ select \* from <measurement> order by time desc limit 1
 select count(\*) from <measurement>
 ```
 
-## remove data points
-delete from <measurement> where ...
-
 ## export command
 ```sh
 influx -database 'wifi_sensing' -execute "SELECT * FROM sensing_data WHERE time>"$start"s and time<"$stop"s and \"testerId\"='1'" -format csv  > tester1_sensing.csv

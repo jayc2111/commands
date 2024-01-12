@@ -36,3 +36,13 @@ Using the given option allows compare even if files have different line endings:
 ## remove ansi color codes
 - `\e\[(.*?)m`: regex for Notepad++
 - `sed -e 's/\x1b\[[0-9;]*m//g'`: with sed
+
+## greps greps greps
+| command | description |
+| `grep -R $'\t' --color`      | non-printable characters                   |
+| `grep -ir --include=*.c  <>` | case insensitive, recursive, file filtered |
+| `grep -ir <> | grep -v  <>`  | filter out with antipattern                |
+| `grep -nirE '<>'`            | search regexe with line number             |
+| `grep -ilr <>`               | filename only                              |
+| `grep -oE "[0-9]{3} ms"`     | with regex, repetition, match only         |
+| `grep -I  <>`                | exclude binaries                           |
