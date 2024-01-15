@@ -1,5 +1,10 @@
 # general
 
+## alias
+- `alias ll='ls -lah'`: create new alias for 'll'
+
+## archives
+- `tar cvfz archive.tar.gz `find . -maxdepth 1 -type f -print``: create a zipped tar archive only containing files
 
 ## customized listing
 - `ls <prefix>??.<extension> | xargs -I{} cat {} | cut -b 1-19`: list group of files and cut some letters from the names
