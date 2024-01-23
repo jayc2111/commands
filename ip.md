@@ -1,5 +1,9 @@
 # ip
 
+## netstat
+- `netstat -tapen`: show all current TCP connections
+
+
 ## tcpdump
 -i … define the interface  
 -n … show IP addresses  

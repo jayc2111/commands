@@ -16,6 +16,11 @@
 
 ## tracing
 
+### strace
+- `strace -p 1383`:  observe process with pid 1383
+- `strace -p 1383 -e trace=write`:  observe process with pid 1383 filter "write" messages
+- `strace -p 1383 -e trace=write -T`:  observe process with pid 1383 filter "write" messages and show delta -time
+
 ### gcov - how often is a function executed?
 1. build your app with flags: `-fprofile-arcs -ftest-coverage`
 2. run app (no SIGINT ! otherwise you need to catch it with a signal handler)

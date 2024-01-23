@@ -50,7 +50,13 @@ Using the given option allows compare even if files have different line endings:
 | `watch -n <time_seconds> "<command>"` | repeat command continuously|
 | `while true; do <command>; sleep 5; done` | do continuously|
 
-### one line loops
+## mounting
+|command|description|
+|-|-|
+| `sudo mount -t cifs -o username=<user> //<rem_host>/<rem_path> /<local_path>` | SMB mount |
+| `sudo mount -t nfs -o soft <rem_host>:/<rem_path> /<local_path>` | NFS mount |
+
+## one line loops
 |command|description|
 |-|-|
 | `for i in {1..5};do echo $i; sleep 1; done` | do something 5 times|
@@ -62,17 +68,36 @@ Using the given option allows compare even if files have different line endings:
 | `\e\[(.*?)m` | regex for Notepad++|
 | `sed -e 's/\x1b\[[0-9;]*m//g'` | with sed |
 
+## string replacement
+|command|description|
+|-|-|
+| `awk '/<pattern>/,/<substitute>/' <filename>` | using awk (advanced tool) |
+| `sed -i 's/<pattern1>/<substitute1>/g; s/<pattern2>/<substitute2>/g;' <filename>` | using sed (simple tool) |
+
+## gpio
+|command|description|
+|-|-|
+| `gpio readall -a`                     | read all pins state |
+| `gpio export <pin> <dir>`             | export, with <dir> 'in' or 'out' |
+| `gpio unexport <pin>`                 | undo export |
+| `cat /sys/class/gpio/gpio<pin>/value` | check specific gpio |
+| `gpio -g read <pin>`                  | undo export |
+| `gpio -g write <pin> <value>`         | with value '1' or '0' |
+
 ## greps greps greps
 |command|description|
 |-|-|
-| `grep -R $'\t' --color`       | non-printable characters                   |
-| `grep -ir --include=*.c  <>`  | case insensitive, recursive, file filtered |
-| `grep -nirE '<>'`             | search regexe with line number             |
-| `grep -ilr <>`                | filename only                              |
-| `grep -oE "[0-9]{3} ms"`      | with regex, repetition, match only         |
-| `grep -I  <>`                 | exclude binaries                           |
-| `grep -ir <> \| grep -v  <>`  | filter out with antipattern                |
+| `grep -R $'\t' --color`       | non-printable characters                    |
+| `grep -ir --include=*.c  <>`  | case insensitive, recursive, file filtered  |
+| `grep -nirE '<>'`             | search regexe with line number              |
+| `grep -ilr <>`                | filename only, (case-invariant)             |
+| `grep -oE "[0-9]{3} ms"`      | with regex, repetition, match only          |
+| `grep -I  <>`                 | exclude binaries                            |
+| `grep -ir <> \| grep -v  <>`  | filter out with antipattern (case-invariant)|
+| `grep -oh <>`                 | match only, without filename                |
+| `grep -v <> |sort| uniq`      | inverted - sort - remove duplicates         |
 
+[1] (https://www.guru99.com/linux-regular-expressions.html)
 
 ## ip link
 |command|description|
