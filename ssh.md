@@ -1,4 +1,7 @@
 # SSH
+remember:  
+- public key: encrypt & verify
+- private key: decrypt & sign
 
 ## tunnel
 -L … Specifies that connections to the given TCP port or Unix socket on the local (client) host are to be forwarded to the given host and port, or Unix socket, on the remote side  
