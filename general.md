@@ -97,7 +97,7 @@ Using the given option allows compare even if files have different line endings:
 | `grep -oh <>`                 | match only, without filename                |
 | `grep -v <> |sort| uniq`      | inverted - sort - remove duplicates         |
 
-[1] (https://www.guru99.com/linux-regular-expressions.html)
+[guru99_expressions](https://www.guru99.com/linux-regular-expressions.html)
 
 ## ip link
 |command|description|

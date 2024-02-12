@@ -1,16 +1,20 @@
 # Windoof
 
-## for loops and replacements
-replace \r\n by \n in all *.c files:
+## for loops and sed
+replace `\r\n` by `\n` in all *.c files:
 ```
 FOR /R . %%f in (*.c) do sed -i "s/\r$//" "%%f"
 ```
 
-replace \r\n by \n in all *.h files:
-`FOR /R . %%f in (*.h) do sed -i "s/\r$//" "%%f"`
+replace `\r\n `by `\n` in all *.h files:
+```
+FOR /R . %%f in (*.h) do sed -i "s/\r$//" "%%f"
+```
 
-or if you have `sed`:
-`sed -i "s/\r\r$//"`
+or single file:
+```
+sed -i "s/\r\r$// <file_name>"
+```
 
 
 ## day by day
