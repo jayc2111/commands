@@ -3,23 +3,48 @@
 ## introduce CPU load
 
 ### onboard utils
-- `nproc | xargs seq | xargs -n1 -P2 md5sum /dev/zero`: useless md5sum calculation
-- `while true; do sleep 1; yes > /dev/null & done`: using 'yes' utility (while loop)
-- `nproc | xargs seq | xargs -P0 -n1 timeout 5 yes > /dev/null`: using 'yes' utility (number of processors)
+useless md5sum calculation:
+```
+nproc | xargs seq | xargs -n1 -P2 md5sum /dev/zero
+```
+
+using 'yes' utility (while loop):
+```
+while true; do sleep 1; yes > /dev/null & done
+```
+
+using 'yes' utility (number of processors):
+```
+nproc | xargs seq | xargs -P0 -n1 timeout 5 yes > /dev/null
+```
 
 
 ### script
-[stress-cppu shell script](https://github.com/elandsness/stresscpubash/blob/master/stresscpu.sh)
-- `nice -n 10 ./stresscpu.sh  10 300`: run script and set nice values as well
+run script and set nice values as well:
+```
+nice -n 10 ./stresscpu.sh  10 300
+```
 
+[stress-cppu shell script](https://github.com/elandsness/stresscpubash/blob/master/stresscpu.sh)
 
 
 ## tracing
 
 ### strace
-- `strace -p 1383`:  observe process with pid 1383
-- `strace -p 1383 -e trace=write`:  observe process with pid 1383 filter "write" messages
-- `strace -p 1383 -e trace=write -T`:  observe process with pid 1383 filter "write" messages and show delta -time
+observe process with pid 1383:
+```
+strace -p 1383
+```
+
+observe process with pid 1383 filter "write" messages:
+```
+strace -p 1383 -e trace=write
+```
+
+observe process with pid 1383 filter "write" messages and show delta -time:
+```
+strace -p 1383 -e trace=write -T
+```
 
 ### gcov - how often is a function executed?
 1. build your app with flags: `-fprofile-arcs -ftest-coverage`
