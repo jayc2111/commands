@@ -1,7 +1,7 @@
 # git commands
 - `git reset`: unstage changes
 - `git reset --hard`: discard all unstaged changes
-- `git reset --hard HEAD~1`: undo one commit
+- `git reset --hard HEAD~1`: undo one commit
 - `git remote -v`: show remote URL
 - `git clean -xfd`: clean out all files that are not in the repo
 - `git fetch origin --prune`: update local list of remote branches
