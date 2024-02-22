@@ -3,13 +3,13 @@
 ## dbus unit tests
 
 list of all services:
-```
+```sh
 dbus-send --print-reply --dest=org.freedesktop.DBus  /org/freedesktop/DBus org.freedesktop.DBus.ListNames
 ``` 
 (see also `busctl tree`, `busctl list --system`)
 
 sending test messages:
-```
+```sh
 #!/bin/bash
 
 my_dbusSend()
@@ -21,7 +21,7 @@ my_dbusSend de.jvag.dbus.starfireconfig setSfActivationKey string:01234567890123
 ```
 
 monitoring messages:
-```
+```sh
 dbus-monitor interface='de.jvag.dbus.starfireconfig'
 ``` 
 

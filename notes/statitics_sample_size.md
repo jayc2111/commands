@@ -2,64 +2,65 @@
 
 # Zufallstichprobe
 
-µ --> Erwartungswert
-sigma --> Standardabweichung
+`µ`  expectation  
+`sigma` standard deviation
 
-## Bedingungen:
-1. Die Elemente werden zufällig aus der Grundgesamtheit gezogen und
-2. die Wahrscheinlichkeit, mit der ein Element aus der Grundgesamtheit gezogen wird, ist angebbar.
+## conditions:
+1. all elements must be choosen arbitrarily from the parent population
+2. the probability for selecting an element from the parent population must be calculable
 
-## Typen
-Einfache Zufallsstichprobe:         "Ziehen mit Zurücklegen." --> Stichprobenvariablen sind unabhängig!
-uneingeschränkte Zufallsstichprobe: "Ziehen ohne Zurücklegen" --> Stichprobenvariablen sind abhängig!
+## types:
+### simple random sample
+*choose with returning*: sample variables are independent
 
-## Stichprobenverteilung
-Die Stichprobenverteilung ergibt sich durch mehrfaches Ziehen einer Stichprobe aus dem Grundgesamtheit. Für jede Stichprobe lässt sich ein Erwartungswert bestimmen. Die Häufigkeitsverteilung dieser Erwartungswerte ergibt die Stichprobenverteilung, welche Gemeinsamkeiten mit der Verteilungsfunktion der Grundgesamtheit hat:
- --> gleicher Mittelwert: µ_x = µ
- --> der sog. Standardfehler sigma_x = sigma/sqrt(n) (hängt also direkt mit der Standardabweichung der Verteilung der Grundgesamtheit zusammen)
+### unrestricted random sample
+*choose without returning*: sample variables are depending
 
-Achtung:
-"Die Standartabweichung der Stichprobenverteilung" ist der sog. Standartfehler. Dieser gibt an, wie sehr die Erwartungswerte der einzelnen Stichproben um den wahren Erwartungswert streuen.
+## sample distribution
+Sample distribution can be determined by choosing multiple times from the parent population. For every sample distribution we  can calculate an expectation. The frequency distribution of the expectations is the sample distribution, which is similiar to the distribution of the parent population.
+- same expectation: `µ_x = µ`
+- standard deviation `sigma_x = sigma/sqrt(n)` (*directly depending on the standard deviation of distribution of the parent population*)
 
-## Zentraler Grenzwertsatz
-"Faustregel": Wenn n > 30 kann man für die Stichprobenverteilung in der Regel annehmen, dass sie sich der Normalverteilung nähert.
+**important**:
+The 'standard deviation of the sample distribution' is called standard error. This value shows how much the the expectations of the individual samples are scattered around the true expectation.
 
+## central limit theorem
+*rule of thumb*: If n > 30 the sample can be regarded as normal-distributed
 
-https://de.wikipedia.org/wiki/Standardfehler
-https://ortmann-statistik.de/glossar/zentraler-grenzwertsatz/#:~:text=Der%20zentraler%20Grenzwertsatz%20besagt%2C%20dass,untersuchenden%20Merkmals%20der%20Normalverteilung%20folgt.
-https://statistikguru.de/lexikon/stichprobenverteilung.html
+[wiki standart deviation](https://de.wikipedia.org/wiki/Standardfehler)
+[central limit theorem](https://ortmann-statistik.de/glossar/zentraler-grenzwertsatz/#:~:text=Der%20zentraler%20Grenzwertsatz%20besagt%2C%20dass,untersuchenden%20Merkmals%20der%20Normalverteilung%20folgt.)
+[sample distribution](https://statistikguru.de/lexikon/stichprobenverteilung.html)
 
-# Grundgesamtheit
-https://www.bpb.de/nachschlagen/zahlen-und-fakten/soziale-situation-in-deutschland/61538/altersgruppen
+# parent population
+(german *Grundgesamtheit*)
+[german peoples ages](https://www.bpb.de/nachschlagen/zahlen-und-fakten/soziale-situation-in-deutschland/61538/altersgruppen)
 
-Für 2018:
-54 648 000 Einwohner zwischen 20 und 70 Jahren
-27 556 000 Männer (50,4%)
-27 096 000 Frauen (49,6%)
-
-
-# Sprachsignale
-Abhängigkeit von ...
-  1. Geschlecht
-  2. Alter
-
-und variert mit:
-  1. Betonung
-  2. Sprechgeschwindigkeit
-  3. (Pausen zwischen Worten)
+For 2018:
+- 54 648 000 Inhabitant between 20 and 70 years
+- 27 556 000 Men (50,4%)
+- 27 096 000 Woman (49,6%)
 
 
+# about speech
+Depending on ...
+  1. gender
+  2. age
 
-Audioaufnahmen --> STFT --> LOG(abs(S)) --> IFFT --> Ceptstrum
+and changing with:
+  1. accentuation
+  2. rate of speaking
+  3. (pauses between words)
+
+
+```
+audio recording --> STFT --> LOG(abs(S)) --> IFFT --> Ceptstrum
                                  |
                                  +--> Filt+DCT --> MFCC
+```
+From ceptstrum or MFCC we can get the featutes of an audio signal.
 
-Aus Ceptstrum oder MFCC erhält man die featutes des Audio Signals.
+&rarr; features are random variables
 
-==> Zufallsvariablen sind die features
+## Q1: how much are the features depending on age/ gender/ accentuation?
 
-Frage1:
-  Wie sehr hängen welche features von Alter/ Geschlecht/ Betonung ab?
-
-Frage2:
-  Wie beeinflusst die Wahl der Fenstergröße der STFT, bzw. auch des Überlappens der Fenster, die resultierenden audio features im Hinblick auf Sprechgeschwindigkeit/ Pausen?
+## Q2: How does the size of the STFT window, or the window overlap, influence the audio features w.r.t. rate of speaking and pauses?

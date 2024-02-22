@@ -4,24 +4,24 @@
 
 ### onboard utils
 useless md5sum calculation:
-```
+```sh
 nproc | xargs seq | xargs -n1 -P2 md5sum /dev/zero
 ```
 
 using 'yes' utility (while loop):
-```
+```sh
 while true; do sleep 1; yes > /dev/null & done
 ```
 
 using 'yes' utility (number of processors):
-```
+```sh
 nproc | xargs seq | xargs -P0 -n1 timeout 5 yes > /dev/null
 ```
 
 
 ### script
 run script and set nice values as well:
-```
+```sh
 nice -n 10 ./stresscpu.sh  10 300
 ```
 
@@ -32,17 +32,17 @@ nice -n 10 ./stresscpu.sh  10 300
 
 ### strace
 observe process with pid 1383:
-```
+```sh
 strace -p 1383
 ```
 
 observe process with pid 1383 filter "write" messages:
-```
+```sh
 strace -p 1383 -e trace=write
 ```
 
 observe process with pid 1383 filter "write" messages and show delta -time:
-```
+```sh
 strace -p 1383 -e trace=write -T
 ```
 
@@ -62,4 +62,4 @@ strace -p 1383 -e trace=write -T
 
 
 ### continously read interfaces
-see tool 'bmon'
+see tool `bmon`

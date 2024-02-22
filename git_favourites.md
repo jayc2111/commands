@@ -57,11 +57,11 @@
 
 ## doing some reviews
 create a list of all changed files:
-```bash
+```sh
 git diff <commit> --name-only > list_of_changed_files.txt
 ```
 If you like, do some pre-filtering. Afterwards, do a git diff for every individual file:
 
-```bash
+```sh
 cat list_of_changed_files.txt | while read line; do git diff <commit> $line; read -n 1 -p -------------------------<&1; clear; done
 ```
