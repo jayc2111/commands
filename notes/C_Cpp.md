@@ -23,3 +23,19 @@ All the things, i usually like to remember but always forget about:
 
 
 [1](https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used)
+
+## type checking on template
+```cpp
+template <typename T>
+void foo(int a, T b)
+{
+    if (std::is_same<T, int>::value)
+		{ /* ... */ } 
+
+    if (std::is_same<T, double>::value)
+		{ /* ... */ } 
+
+}
+```
+See also `type_traits` in later versions of C++.
+[stack-overflow](https://stackoverflow.com/questions/13636540/how-to-check-for-the-type-of-a-template-parameter)
