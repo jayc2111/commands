@@ -1,70 +1,110 @@
 
-# Formate
+# certificate file formats
 
 ## PEM (Privacy Enhanced Mail)
 .pem / .key
 .pem / .cert / .crt 
-(meist) wenn sowohl Zertifikate und der Privatschlüssel in einer Datei gespeichert werden
+(mostly) certificate and privates key saved in one file
  
 ## DER (Distinguished Encoding Rules)
-Bei einer .der-Datei handelt es sich um die binäre Form der Base64-kodierten .pem-Datei. Dieses Format unterstützt die Speicherung eines einzelnen Zertifikats.
-auch: .cer
+A .der-file is a base64 encoded binary version of an .pem-file. It is also possible to store separate certificates.  
+also: .cer
 
 ## PFX oder P12
 .p12 / .pfx
-Das binäre Format kann neben dem Zertifikat auch alle Zertifikate des Zertifizierungspfads und zudem den privaten Schlüssel enthalten. Alles in einer Datei. Darüber hinaus ist es möglich die  Datei passwortgeschützt zu speichern. Als Dateiendungen kommen .pfx oder .p12
+This kind of file is also binary formatted und can hold a certificate and well as the path to the private key. It is also possible to store this kind of file password encrypted
 
 ## CSR (Certificate Signing Request)
-Anfordern eines digitalen Zertifikats und enthält den öffentlichen Schlüssel und weiteren Angaben über den Antragsteller
+Request for a digital certificate which contains the public key along with more details about the requesting party.
 
 ## super easy to remember ...
 There is no real correlation between the file extension and encoding. That means a .crt file can either be a .der encoded file or .pem encoded file.
 
 ## bundles of certificates
-Although root certificates exist as single files they can also be combined into a bundle. On Debian based Linux systems these root certificates are stored in the /etc/ssl/certs folder along with a file called ca-certificates.crt.
+Although root certificates exist as single files they can also be combined into a bundle. On Debian based Linux systems these root certificates are stored in the `/etc/ssl/certs` folder along with a file called `ca-certificates.crt`.
 
 
-# Kommandos
-*generate key with password*: `openssl genrsa -des3 -out server_key.pem 2048` <br>
-*generate key without password*: `openssl genrsa -out broker.key 2048`
+# commands
+generate key with password:
+```sh
+openssl genrsa -des3 -out server_key.pem 2048
+```
+generate key without password:
+```sh
+openssl genrsa -out broker.key 2048
+```
+
+# testing with raspberry and odroid
+
+## raspi
+run broker:
+```sh
+sudo mosquitto -v -c /etc/mosquitto/mosquitto.conf
+```
+
+publish on localhost:
+```sh
+mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h localhost -m hello -t <topic>
+```
+
+publish on remote:
+```sh
+mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h <hostname_raspi> -m hello -t <topic>
+```
 
 
-  
-# raspberry local test
-broker: `sudo mosquitto -v -c /etc/mosquitto/mosquitto.conf`  
-client: `mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h localhost -m hello -t /world`  
-client: `mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h raspi3 -m hello -t /world`  
+## odroid
+very nice: you can save config files for mosquitto_sub and mosquitto_pub to set default options:
+```sh
+~/.config/mosquitto_sub
+~/.config/mosquitto_pub
+```
+(one pair "option value" per line)  
 
+### without TLS
+```sh
+mosquitto_sub -v -t /# -t /userInteraction/# -q 2 -F '%t: %X (%l)' -h "<ip_odroid>"
+```
+ 
+```sh
+echo -ne "\x05" | mosquitto_pub -d -t "<topic>" -h "<ip_odroid>" -s
+```
 
-# odroid test
-very nice: you can save config files for mosquitto_sub and mosquitto_pub to set default options:  
-`~/.config/mosquitto_sub`  
-`~/.config/mosquitto_pub`  
-(one pair of option value per line)  
+### with TLS
+```sh
+mosquitto_sub -d -v -q 2 -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h <hostname_odroid> -t "/#" -F '%t: %X (%l)'
+```
 
-## without TLS
-`mosquitto_sub -v -t /motionCmd/# -t /userInteraction/# -q 2 -F '%t: %X (%l)' -h "192.168.2.137"`  
-`echo -ne "\x05" | mosquitto_pub -d -t "/motion/status" -h "192.168.2.137" -s`  
+```sh
+echo -ne "\x05" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h <hostname_odroid> -t "<topic>" -s
+```
 
-## with TLS
-`mosquitto_sub -d -v -q 2 -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.key -h odroidc4 -t "/#" -F '%t: %X (%l)'`  
-`echo -ne "\x05" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/motion/status" -s`  
-`echo -ne "\x01" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/immersiveOff" -s`  
+```sh
+echo -ne "\x01" | mosquitto_pub -d -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h <hostname_odroid> -t "<topic>" -s
+```
+(with config)
+
+```sh
+echo -ne "\x01" | mosquitto_pub -d -t "<topic>" -s
+```
+
+#### receive a file
+`mosquitto_sub -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h <hostname_odroid> -t "<topic>" -C 1 > image1.png
+```
 (with config)  
-`echo -ne "\x01" | mosquitto_pub -d -t "/motion/status" -s`  
-
-### receive a file
-`mosquitto_sub -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h odroidc4 -t "/map" -C 1 > image1.png`  
-(with config)  
-`mosquitto_sub -t "/map" -C 1 > image1.png`  
+`mosquitto_sub -t "<topic>" -C 1 > image1.png
+```
 
 
 
 # android file paths
-
-```kotlin
+remember:
+```
 "data/user/0/" = "/data/data/"
+```
 
+use it:
+```kotlin
 val path = "/data/data/com.example.mymqtt/files/certificate.pfx"
 // "/data/user/0/com.example.mymqtt/files/certificate.pfx"
 val path = baseContext.filesDir.absolutePath + "/certificate.pfx"
