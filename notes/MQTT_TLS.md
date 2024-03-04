@@ -2,23 +2,23 @@
 # certificate file formats
 
 ## PEM (Privacy Enhanced Mail)
-.pem / .key
-.pem / .cert / .crt 
+`.pem` / `.key`  
+`.pem` / `.cert` / `.crt`  
 (mostly) certificate and privates key saved in one file
  
 ## DER (Distinguished Encoding Rules)
 A .der-file is a base64 encoded binary version of an .pem-file. It is also possible to store separate certificates.  
-also: .cer
+also: `.cer`
 
 ## PFX oder P12
-.p12 / .pfx
-This kind of file is also binary formatted und can hold a certificate and well as the path to the private key. It is also possible to store this kind of file password encrypted
+`.p12` / `.pfx`  
+This kind of file is also binary formatted und can hold a certificate and well as the path to the private key. It is also possible to store this kind of file password encrypted.
 
 ## CSR (Certificate Signing Request)
 Request for a digital certificate which contains the public key along with more details about the requesting party.
 
 ## super easy to remember ...
-There is no real correlation between the file extension and encoding. That means a .crt file can either be a .der encoded file or .pem encoded file.
+There is no real correlation between the file extension and encoding. That means a .crt-file can either be a .der encoded file or .pem encoded file.
 
 ## bundles of certificates
 Although root certificates exist as single files they can also be combined into a bundle. On Debian based Linux systems these root certificates are stored in the `/etc/ssl/certs` folder along with a file called `ca-certificates.crt`.
@@ -54,7 +54,7 @@ mosquitto_pub -d -p 8883 --cafile ../ca/ca.crt --cert client.crt --key client.ke
 
 
 ## odroid
-very nice: you can save config files for mosquitto_sub and mosquitto_pub to set default options:
+*very nice*: you can save config files for mosquitto_sub and mosquitto_pub to set default options:
 ```sh
 ~/.config/mosquitto_sub
 ~/.config/mosquitto_pub
@@ -63,7 +63,7 @@ very nice: you can save config files for mosquitto_sub and mosquitto_pub to set 
 
 ### without TLS
 ```sh
-mosquitto_sub -v -t /# -t /userInteraction/# -q 2 -F '%t: %X (%l)' -h "<ip_odroid>"
+mosquitto_sub -v -t /# -q 2 -F '%t: %X (%l)' -h "<ip_odroid>"
 ```
  
 ```sh
@@ -89,9 +89,11 @@ echo -ne "\x01" | mosquitto_pub -d -t "<topic>" -s
 ```
 
 #### receive a file
-`mosquitto_sub -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h <hostname_odroid> -t "<topic>" -C 1 > image1.png
+```sh
+mosquitto_sub -q 2 -p 8883 --cafile ca.crt --cert client.crt --key client.key -h <hostname_odroid> -t "<topic>" -C 1 > image1.png
 ```
 (with config)  
+```sh
 `mosquitto_sub -t "<topic>" -C 1 > image1.png
 ```
 
