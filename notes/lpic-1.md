@@ -2,37 +2,37 @@
 
 ## 101
 
-### Hardwarekomponenten (dynamisches Laufwerk)
+### hardware components (dynamic drive)
 ```
 /proc/
  ├── interrupts             system interrupts
- ├── ioports                IO-Adressen
- ├── ~scsi~                 serielle Geräte
+ ├── ioports                IO-addresses
+ ├── ~scsi~                 serial devices
  ├── ~dma~                  direct memory access
- ├── ~pci~                  siehe unten
+ ├── ~pci~                  see below
  ├── bus/
- │   └── pci                alle angeschlossenen PCI Geräte   lspci <-vvv> 
- ├── modules                alle geladenen Kernel Module      lsmod
- └── sys/   
+ │   └── pci                all connected PCI devices    lspci <-vvv>
+ ├── modules                all loaded kernel modules    lsmod
+ └── sys/
      └── kernel
          ├── osrelease
-         ├── ostype         Kernel config im RAM
+         ├── ostype         kernel config in RAM
          ├── hostname
          └── modprobe
-``` 
-### virtuelle Dateisystem (dynamisches Laufwerk)
+```
+### virtuall file system (dynamic drive)
 ```
 /sys/
  ├── block
  ├── bus
- ├── class                  Treibermodule des laufend. Kernels
+ ├── class                  driver modules of the running kernel
  ├── dev
  ├── devices
   ...
  └──
 ```
 
-### Gerätedateien (dynamisches Laufwerk)
+### device files (dynamic drive)
 ```
 /dev/
  ├── null
@@ -43,7 +43,7 @@
  ├── tty*
  ├── random
  ├── bus/
- │   └── usb        alle angeschlossenen USB Geräte   lsusb <-t> 
+ │   └── usb                all connected USB devices   lsusb <-t>
  └── sda1/
   ...
  ├── sdaN/
@@ -54,38 +54,38 @@
 ### systemd
 ```
 /usr/
- └── lib/systemd/system   Startskripte
- 
+ └── lib/systemd/system     start scripts
+
 /lib/
- └── systemd/system       Startskripte (wenn nicht unter /usr/)
+ └── systemd/system         start scripts (if not under /usr/)
 
 /etc/
- └── systemd/system       Symlinks auf Startskripte
+ └── systemd/system         symlinks to start scripts
 ```
 
-### wichtige Programme
+### important apps
 ```
 /sbin/
- ├── init           init deamon
- ├── mingetty       Helferlein, um virtuelle Konsolen zu öffnen
- └── modprobe       schweizer Taschenmesser für Kernel Module
+ ├── init                   init deamon
+ ├── mingetty               helper to open virtual consoles
+ └── modprobe               swiss army knife for kernel modules
 ```
 
 
 ### misc
 ```
 /boot/
- ├── efi            EFI partition
- ├── initrd         Initiales RAM disk image ("Lesen von der HDD bevor Treiber geladen")
+ ├── efi                    EFI partition
+ ├── initrd                 Initial RAM disk image ("read from HDD before driver has been loaded")
  └── grub/
-     └── grub.cfg   kernel boot parameter 
+     └── grub.cfg           kernel boot parameter
 
 /etc/
- ├── init.d         Verzeichnis mit Skripten, die der init-deamon startet (auch /etc/rc.d)
- └── inittab        Konfigurationsdabei für den init-daemon
+ ├── init.d                 directory with Scripts that start the init-deamon (also /etc/rc.d)
+ └── inittab                config-file for init-daemon
 
 /var/
  └── log/
-     └── messages   (oder auch syslog) dmesg-Ausgaben von vorherigen Systemstarts
+     └── messages           (or syslog) dmesg-output from the previous system start
 
 ```

@@ -28,7 +28,7 @@ X-API-Key: abcdefgh123456789
 ```
 
 ## Digest Auth
-Using this kind of authentification requires a special flow. 
+Using this kind of authentification requires a special flow:
 1. client asks server for access
 1. server provides *nonce* and *realm* (a hash)
 1. client hashes username and password with given realm and sends that together with the nonce back
@@ -38,7 +38,7 @@ Authorization: Digest username=”admin” Realm=”abcxyz” nonce=”474754847
 ```
 
 ## OAuth2.0
-Using this kind of authentification requires a special flow. 
+Using this kind of authentification requires also a special flow:
 1. client asks server for access (specific endpoint for that, also provide client ID, scopes, callback URI, ...)
 1. server ask authServer to take over (redirect URL)
 1. authServer asks client for username and password.

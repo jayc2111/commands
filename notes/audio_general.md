@@ -34,4 +34,4 @@ Depends on wavelength:
 | resitance R [Ω] | acoustic impedance Z [Ns/m³] |
 | power P [W]     | sound intensity I [W/m²] |
 
-[1](https://sengpielaudio.com/Rechner-ak-ohm.htm)
+[sengpiel acoustic equivalences](https://sengpielaudio.com/Rechner-ak-ohm.htm)

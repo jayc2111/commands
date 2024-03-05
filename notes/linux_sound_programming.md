@@ -18,9 +18,10 @@
 | Audacity  | is THE free audio file editor and recorder                                                                                         |
 
 # basics on sound 
-[This link](https://manual.audacityteam.org/man/digital_audio.html) is a good reference about audio files formats: 
+[This link](https://manual.audacityteam.org/man/digital_audio.html) is a good reference about audio files formats.
+
 ## sound processing building blocks in linux
-Device Drivers &rarr; soundservers &rarr; "sound giving applications" (media players/ webbrowsers)
+Device Drivers &rarr; soundservers &rarr; "sound giving applications" (media players/ web browsers)
 
 
 # ALSA:

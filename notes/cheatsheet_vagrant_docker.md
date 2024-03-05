@@ -10,13 +10,13 @@
 | stop machine                 | `vagrant halt` |
 | spit out current ssh config  | `vagrant ssh-config` |
 | load local file into machine | `vagrant upload localfile` |
-| install VBox guest additons  | `vagrant plugin install vagrant-vbguest |
+| install VBox guest additons  | `vagrant plugin install vagrant-vbguest` |
 
 
-# Vagrant on Windows kernelmodule
-`sudo modprobe snd_intel8x0`
-`modprobe --show-depends snd_intel8x0`
-`journalctl -b`
+# Vagrant on Windows: testing kernel modules
+`sudo modprobe snd_intel8x0`  
+`modprobe --show-depends snd_intel8x0`  
+`journalctl -b`  
 
 ## don't forget
  - un-blacklist driver & reboot
@@ -25,12 +25,14 @@
 
 
 ## find matching audio driver
-`basename -s ".ko" $(find /lib/modules/$(uname -r) -type f -name "*.ko"  | grep snd | grep via)`
-`basename -s ".ko" $(find /lib/modules/$(uname -r)/kernel/sound -type f -name "*.ko")`
+```sh
+basename -s ".ko" $(find /lib/modules/$(uname -r) -type f -name "*.ko"  | grep snd | grep via)
+```
+for a sound device:
+```sh
+basename -s ".ko" $(find /lib/modules/$(uname -r)/kernel/sound -type f -name "*.ko")
+```
 
-
- /etc/modprobe.d/
- 
  
 # docker
 | description | command |
