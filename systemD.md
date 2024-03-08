@@ -17,12 +17,12 @@ my_dbusSend()
     dbus-send --print-reply --dest=$1 /${1//[.]//} $1.$2 $3 1>/dev/null
 }
 
-my_dbusSend de.jvag.dbus.starfireconfig setSfActivationKey string:01234567890123456789012345678901
+my_dbusSend <namespace> <method> <arg_type>:<arg>
 ```
 
 monitoring messages:
 ```sh
-dbus-monitor interface='de.jvag.dbus.starfireconfig'
+dbus-monitor interface='<namespace>'
 ``` 
 
 ## links

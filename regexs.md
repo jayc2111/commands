@@ -5,7 +5,7 @@ strings with part-wise same content:
 PB_2_71_.*0x.{22}89|PB_71_2_.*0x.{22}89
 ```
 
-strings acreoos multiple lines:
+strings across multiple lines:
 ```
 send_data .*(\n.*){3,}?\n.*send_data end--------
 ```
@@ -29,4 +29,8 @@ convert date string to dotted format:
 ```
 echo '1032020' | sed 's/[0-9]\{4\}$/.&/g' | sed 's/[0-9]\{2\}\./.&/g'
 ```
-> remember: `$` before the linebreak, digits always with `[0-9]`, escape bracket and dots
+
+## remember:
+- `$` before the linebreak
+- digits always with `[0-9]`
+- escape bracket and dots

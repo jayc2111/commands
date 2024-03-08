@@ -24,18 +24,19 @@ current unix time (localtime):
 date +%s
 ```
 
-specific unix time (localtime):
+date format to unix time (localtime):
 ```sh
 date +%s -d "2023-01-05 12:00:00"
 ```
 
-current unix time (localtime):
+unix time to date format (localtime):
 ```sh
 date -d@1672740300
 ```
 
 ## compare directories/ files
-Using the given option allows compare even if files have different line endings:
+Using the given option allows compare even if files have different line endings:  
+
 compare 2 files:
 ```sh
 diff -r --strip-trailing-cr <file1> <file2>
@@ -46,7 +47,7 @@ compare 2 directories (show also file content diff):
 diff -r --strip-trailing-cr <directory1> <directory2>
 ```
 
-compare 2 directories, show only differencing files:
+compare 2 directories, show only differing files:
 ```sh
 diff -qr --strip-trailing-cr <directory1> <directory2> | grep 'differ'
 ```
@@ -73,7 +74,7 @@ if line contents are separated by tabs:
 for line in $(cat <filename>);do echo $line | cut -f1 -d$'\t'; done
 ```
 
-pipe into loop:
+pipe file into while loop:
 ```sh
 while read p;do echo $p | cut -f1-3 -d' '; done < <filename>
 ```
@@ -89,7 +90,7 @@ repeat command continuously:
 watch -n <time_seconds> "<command>"
 ```
 
-do continuously:
+repeat command continuously in loop:
 ```sh
 while true; do <command>; sleep 5; done
 ```
@@ -172,7 +173,7 @@ non-printable characters:
 grep -R $'\t' --color
 ```
 
-case insensitive, recursive, file filtered:
+case insensitive, recursive, file type filtered:
 ```sh
 grep -ir --include=*.c <>
 ```
@@ -182,7 +183,7 @@ search regexe with line number:
 grep -nirE '<>'
 ```
 
-filename only, (case-invariant):
+show filename only, case-invariant:
 ```sh
 grep -ilr <>
 ```
@@ -197,7 +198,7 @@ exclude binaries:
 grep -I <>
 ```
 
-filter out with antipattern (case-invariant):
+filter out with antipattern, case-invariant:
 ```sh
 grep -ir <> | grep -v <>
 ```

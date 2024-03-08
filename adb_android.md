@@ -1,11 +1,44 @@
 # adb android
 
-# use adb for android
-- `adb shell`: open shell on android device
-- `adb devices`: list connected devices
-- `adb tcpip <port>`: set port for ip connection
-- `adb connect <ip_addr>`: connect to device via IP
-- `sudo adb kill-server`: kill adb server (host)
-- `sudo adb start-server`: restart adb server (host)
-- `adb shell pidof -s <namespace>`: get PID for app with certain namespace
-- `adb logcat --pid=<pid>`: filter log output using PID
+## basics
+open shell on android device:
+```sh
+adb shell
+```
+
+list connected devices:
+```sh
+adb devices
+```
+
+set port for ip connection:
+```sh
+adb tcpip <port>
+```
+
+connect to device via IP:
+```sh
+adb connect <ip_addr>
+```
+
+kill adb server (host):
+```sh
+sudo adb kill-server
+```
+
+restart adb server (host):
+```sh
+sudo adb start-server
+```
+
+## working with logs
+
+get PID for app with certain namespace:
+```sh
+adb shell pidof -s <namespace>
+```
+
+filter log output using PID:
+```sh
+adb logcat --pid=<pid>
+```

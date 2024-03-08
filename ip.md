@@ -10,35 +10,37 @@ netstat -tapen
 ## tcpdump
 -i … define the interface  
 -n … show IP addresses  
--l … Make stdout line buffered  
+-l … make stdout line buffered  
 -s … limit capture size per frame (use -s0 to get the complete frame)  
 -A … Print each packet (minus its link level header) in ASCII  
 -X … show HEX and ASCII (packet content)  
 -x … show HEX (packet content)  
+-r … read from pcap file
+-w … write to pcap file
 
 ### examples
 ```sh
 tcpdump -i eth1 dst 192.168.2.14 -X
-tcpdump -i any host 192.168.2.14 -X > log.txt
-tcpdump -i any port 50022 or port 50023 -X > log.txt
+tcpdump -i any host 192.168.2.14 -X > <file_name>
+tcpdump -i any port 50022 or port 50023 -X > <file_name>
 ```
 
 ### to file:
 ```sh
-tcpdump -i any -X port 50023 and src 192.168.2.12 -w file.pcap
+tcpdump -i any -X port 50023 and src 192.168.2.12 -w <file>.pcap
 ```
 
 ### from file:
 ```sh
-tcpdump -qns 0 -X -r trace.pcap
-tcpdump -n -X -r trace.pcap
+tcpdump -qns 0 -X -r <file>.pcap
+tcpdump -n -X -r <file>.pcap
 tcpdump -n "dst port 4391 or dst port 4135 or dst port 10000"
 ```
 
 all UDP from a file:
 ```sh
-tcpdump -n proto UDP and host 192.168.2.14 -r trace.pcap > log.txt
-tcpdump -nx port 50011 or port 50010 -r trace.pcap > log.txt 
+tcpdump -n proto UDP and host 192.168.2.14 -r <file>.pcap > <file_name>
+tcpdump -nx port 50011 or port 50010 -r <file>.pcap > <file_name> 
 ```
 
 ### Filter host:

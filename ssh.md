@@ -43,5 +43,5 @@ sshfs -o debug,sshfs_debug,loglevel=debug,uid=1000,gid=1000 <rem_ip>:/<rem_path>
 
 unmount:
 ```sh
-fusermount -u ~/share`: unmount
+fusermount -u ~/share`
 ```
