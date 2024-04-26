@@ -43,7 +43,7 @@ tcpdump -n proto UDP and host 192.168.2.14 -r <file>.pcap > <file_name>
 tcpdump -nx port 50011 or port 50010 -r <file>.pcap > <file_name> 
 ```
 
-### Filter host:
+### filter host:
 ```sh
 Host x.x.x.x
 dst host, net, port or portrange
@@ -51,7 +51,7 @@ src host, net, port or portrange
 Port x
 ```
 
-### Filter network:
+### filter network:
 all in my local home net:
 ```sh
 net 192.168.0
@@ -72,6 +72,21 @@ net 52
 ### refs
 [netgate docu](https://docs.netgate.com/pfsense/en/latest/diagnostics/packetcapture/tcpdump.html#w-flag)
 
+
+## ip command
+```sh
+ip link show
+ip --color addr show
+ip link set dev <name> down
+ip link set dev <name> up
+```
+
+check ARP:
+```sh
+ ip neigh show
+```
+
+[IP command docu](https://www.tecmint.com/ip-command-examples/)
 
 ## UDP
 simple testing:

@@ -215,13 +215,15 @@ grep -v <> |sort| uniq
 
 [guru99_expressions](https://www.guru99.com/linux-regular-expressions.html)
 
-## ip link
-bring interface down:
+## users & groups
+
+show all users with their groups:
 ```sh
-ip link set dev <interface> down
+cat /etc/passwd
 ```
 
-bring interface up:
+show all groups and their users:
 ```sh
-ip link set dev <interface> up
+cat /etc/group
+getent group | grep "<groupname>"
 ```
