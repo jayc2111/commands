@@ -210,7 +210,12 @@ grep -oh <>
 
 inverted - sort - remove duplicates:
 ```sh
-grep -v <> |sort| uniq
+grep -v <> | sort | uniq
+```
+
+first characters of a line:
+```sh
+cat names.list | grep '^PRFX_'
 ```
 
 [guru99_expressions](https://www.guru99.com/linux-regular-expressions.html)

@@ -30,6 +30,21 @@ share file:
 scp -o 'Proxyjump user@<remote_hop>' <file> user@<remote_dst>:/<path>
 ```
 
+### awesome config (auto-proxyjump)
+put into `~/.ssh/config`:
+
+```
+host <remote_hop>
+  HostName <remote_hop_ip>
+  User <user_hop>
+
+Host <remote_dst>
+  User <user_dst>
+  IdentityFile <local_key_file>
+  ForwardAgent yes
+  ProxyCommand ssh <remote_hop> nc %h %p
+```
+
 ## mount filesyste using ssh
 mount (username):
 ```sh
