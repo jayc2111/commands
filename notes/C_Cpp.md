@@ -39,3 +39,19 @@ void foo(int a, T b)
 ```
 See also `type_traits` in later versions of C++.  
 [template parameter on stackoverflow](https://stackoverflow.com/questions/13636540/how-to-check-for-the-type-of-a-template-parameter)
+
+
+# gdb
+coredump an ubuntu 24.04:
+```
+export LD_LIBRARY_PATH=<additional libs>
+ulimit -c unlimited
+gdb <path_executable> <path_core>
+```
+
+also usefull:
+```
+find <path> -iname *.core
+ll /var/lib/apport/coredump/core.*
+cat /var/log/apport.log
+```

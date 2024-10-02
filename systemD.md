@@ -23,6 +23,7 @@ my_dbusSend <namespace> <method> <arg_type>:<arg>
 monitoring messages:
 ```sh
 dbus-monitor interface='<namespace>'
+dbus-monitor "type='signal',sender='org.gnome.TypingMonitor',interface='org.gnome.TypingMonitor'"
 ``` 
 
 ## links

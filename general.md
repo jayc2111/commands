@@ -232,3 +232,12 @@ show all groups and their users:
 cat /etc/group
 getent group | grep "<groupname>"
 ```
+
+check if user exists and add:
+```sh
+if ! id -u "<name>" >/dev/null 2>&1; then
+    useradd -r -d "/home/<name>" -s /bin/sh <name>
+    echo "added user \"<name>\""
+fi
+```
+
