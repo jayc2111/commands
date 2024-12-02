@@ -44,3 +44,9 @@ echo -n | openssl s_client -showcerts -connect <url>:443 \
 sudo mv my_trusted_cert.pem /usr/local/share/ca-certificates/my_trusted_cert.crt
 sudo update-ca-certificates
 ```
+
+
+## read info from cert
+```
+openssl x509 -inform pem -noout -text -in <file>.pem
+```

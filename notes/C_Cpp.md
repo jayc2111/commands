@@ -3,6 +3,18 @@ All the things, i usually like to remember but always forget about:
 
 # C 
 
+## don't miss cable disconnect
+```
+int enableKeepAlive = 1;
+int maxIdle = 3;
+int count = 3;
+int interval = 1;
+
+setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, &enableKeepAlive, sizeof(enableKeepAlive));
+setsockopt(fd, IPPROTO_TCP, TCP_KEEPIDLE, &maxIdle, sizeof(maxIdle));
+setsockopt(fd, IPPROTO_TCP, TCP_KEEPCNT, &count, sizeof(count));
+setsockopt(fd, IPPROTO_TCP, TCP_KEEPINTVL, &interval, sizeof(interval));
+```
 
 
 # C++
@@ -55,3 +67,34 @@ find <path> -iname *.core
 ll /var/lib/apport/coredump/core.*
 cat /var/log/apport.log
 ```
+
+## cross compiled binary
+In case you have no gdb on target but the cross-compiler toolchain on your PC, you can also run the host system's version of GDB and load the target's libararies from the SDK.
+```
+TOOLCHAIN="<path1>"
+GDB=$TOOLCHAIN/<path>/<prefix>-gdb
+
+SYSROOT="<path2>"
+
+
+EXECUTABLE=<binary_name>
+CORE=<core_name>
+
+$GDB -ex "set sysroot $SYSROOT"\
+     -ex "set auto-load safe-path /"\
+     -ex "file $EXECUTABLE"\
+     -ex "core-file $CORE"
+     -ex "thread apply all bt full"\
+     -ex "quit" > trace.log
+```
+
+further options:
+```
+     -ex "set solib-absolute-prefix <>"\
+     -ex "set solib-search-path <>"\
+     -ex "set debug-file-directory <>"\
+```
+see also [link](https://tomsalmon.eu/2020/01/gdb-coredump-backtrace-for-cross-platform-debugging/)
+
+
+

@@ -37,22 +37,33 @@ date -d@1672740300
 ## compare directories/ files
 Using the given option allows compare even if files have different line endings:  
 
-compare 2 files:
+### compare 2 files:
+plain:
 ```sh
 diff -r --strip-trailing-cr <file1> <file2>
 ```
+filter changes w.r.t differences:
+```
+diff --changed-group-format='%<' --unchanged-group-format='' file1 file2 > only_f1
+diff --changed-group-format='%>' --unchanged-group-format='' file1 file2 > only_f2
+```
+```
+comm -23 file1 file2 > only_f1
+comm -13 file1 file2 > only_f2
+```
 
-compare 2 directories (show also file content diff):
+### compare 2 directories (show also file content diff):
+show also file content diff:
 ```sh
 diff -r --strip-trailing-cr <directory1> <directory2>
 ```
 
-compare 2 directories, show only differing files:
+show only differing files:
 ```sh
 diff -qr --strip-trailing-cr <directory1> <directory2> | grep 'differ'
 ```
 
-compare 2 directories and sort diff:
+sort diff:
 ```sh
 diff -qr --strip-trailing-cr <directory1> <directory2> | sort
 ```
