@@ -19,6 +19,11 @@ my_dbusSend()
 
 my_dbusSend <namespace> <method> <arg_type>:<arg>
 ```
+or
+```
+dbus-send --system --print-reply --dest=org.freedesktop.Avahi / org.freedesktop.DBus.Introspectable.Introspect
+dbus-send --system --print-reply --dest=org.freedesktop.Avahi / org.freedesktop.Avahi.Server.ResolveAddress int32:-1 int32:-1 string:<ip_addr> uint32:0
+```
 alternative:
 ```
 busctl call <service> <path> <interface> -- <method> <argument_format_string> <arguments>
