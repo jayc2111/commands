@@ -95,6 +95,16 @@ pipe into loop, split to variables:
 while IFS=$'\t' read <var1> <var2> <var3>; do echo -n "<var1> "; done < <filename>
 ```
 
+pipe into file:
+```sh
+cat << EOF >> /path/filename
+
+content
+content
+content
+EOF
+```
+
 ## automation
 repeat command continuously:
 ```sh
@@ -252,3 +262,37 @@ if ! id -u "<name>" >/dev/null 2>&1; then
 fi
 ```
 
+## do SQL DB backup
+```
+
+user=<>
+passwd=<>
+db=<>
+
+
+mysqldump \
+--add-drop-database \
+--add-drop-table \
+--create-options \
+--default-character-set=utf8 \
+--disable-keys \
+--order-by-primary \
+--quick \
+--quote-names \
+--set-charset \
+--dump-date \
+--comments \
+--no-autocommit \
+--skip-dump-date \
+--single-transaction \
+--user="$user" \
+--password="$passwd" \
+--databases "$db" |
+bzip2 -c9 > "backup.sql.bz2" ||
+{
+        # Remove, as it is either empty or contains garbage on failure
+        rm -f "backup.sql.bz2"
+        exit 2
+}
+echo "$db done"
+```
