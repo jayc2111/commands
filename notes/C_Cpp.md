@@ -88,6 +88,14 @@ $GDB -ex "set sysroot $SYSROOT"\
      -ex "quit" > trace.log
 ```
 
+sometimes easier:
+```
+$GDB -ex "file $EXECUTABLE"\
+     -ex "core-file $CORE"\
+	 -ex "set sysroot $SYSROOT"
+```
+
+
 further options:
 ```
      -ex "set solib-absolute-prefix <>"\
