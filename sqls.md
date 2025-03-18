@@ -18,6 +18,7 @@ ORDER BY table1.col1;
 ```
 SELECT * INTO tmpTable FROM srcTbl DidVariants WHERE col1=1;
 UPDATE tmpTable SET col2=15;
+DELETE FROM srcTbl WHERE col2 IN (1,2,3); 
 INSERT INTO srcTbl SELECT * FROM tmpTable;
 DROP TABLE tmpTable;
 ```
