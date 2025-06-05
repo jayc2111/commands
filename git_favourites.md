@@ -7,6 +7,8 @@
 - `git fetch origin --prune`: update local list of remote branches
 - `git stash`/`git stash pop`: put your changes temporarely aside
 - `git config --global alias.lg 'log --oneline -10'`: configure alias
+- `git config --global push.autoSetupRemote  true`: configure push behaviour local branches
+- `git config --global diff.tool meld`: configure diff tool
 - `git commit --amend --no-edit`: amend to previous commit without changing commit message
 - `git update-index --chmod=+x <file>`: update file permissions
 
@@ -15,6 +17,7 @@
 - `git branch -a --contains <commit>`: find remote branch which contains this commit
 - `git branch -r | grep -v '\->' | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | while read remote; do git fetch origin "${remote#origin/}"; done`: fetch all your local branches
 - `git checkout -b <local_name>  <remote_repo>/<remote_name>`: checkout new branch from remote
+- `git show <branch>:<file> | <editor>`: show file content on different branch
 
 ## lfs
 - `git lfs install`: install 
@@ -27,6 +30,7 @@
 - `git diff <commit_hash> --name-only`: only show filenames of modified files
 - `git diff <commit_hash1> <commit_hash2> --name-status | sort`: compare files between commits and sort w.r.t. their modification
 - `git difftool <branch1> <branch3> -- <file>`: compare file between 2 branches
+- `git difftool --dir-diff <commit_hash1> <commit_hash2>`: compare with difftool
 
 ## patch
 - `git diff > <name>.patch`: create patch
@@ -60,8 +64,13 @@ create a list of all changed files:
 ```sh
 git diff <commit> --name-only > list_of_changed_files.txt
 ```
-If you like, do some pre-filtering. Afterwards, do a git diff for every individual file:
 
+If you like, do some pre-filtering. Afterwards, do a git diff for every individual file:
 ```sh
 cat list_of_changed_files.txt | while read line; do git diff <commit> $line; read -n 1 -p -------------------------<&1; clear; done
+```
+
+find the last common commit for 2 branches:
+```sh
+git merge-base <branch1> <branch3>
 ```

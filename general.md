@@ -68,6 +68,11 @@ sort diff:
 diff -qr --strip-trailing-cr <directory1> <directory2> | sort
 ```
 
+## DNS cache reset
+```sh
+sudo resolvectl flush-caches
+```
+
 ## reading log files
 read new lines at file end:
 ```sh

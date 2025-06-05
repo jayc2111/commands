@@ -6,6 +6,12 @@ show all current TCP connections:
 netstat -tapen
 ```
 
+## nmap
+list all devices in specific subnet:
+```sh
+sudo nmap -sn xxx.yyy.zzz.0/24
+```
+
 
 ## tcpdump
 -i … define the interface  

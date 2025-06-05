@@ -47,6 +47,16 @@ basename -s ".ko" $(find /lib/modules/$(uname -r)/kernel/sound -type f -name "*.
 | start a stopped container w. output | `docker start -ai container_name` |
 | check authentification | `docker login <hostname>` |
 
+## podman
+| description | command |
+| - | - |
+| show basic info | `podman system info` |
+| run container | `podman run -ti --rm --name myContainer <img-name>:<img-version> /bin/bash` |
+| list all containers | `podman container ps -a` |
+| clean up images | `podman image prune` |
+| | `` |
+
+see also configuration: `/usr/share/containers/containers.conf`
 
 # rasa
 
